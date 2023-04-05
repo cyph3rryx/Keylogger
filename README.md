@@ -16,4 +16,6 @@ This version of the program includes the following additional features:
 
 You can contribute to this project by analyzing the code and mention the tweaks by creating pull request.
 
-# Licenese
+# License
+
+This project is under MIT License. So feel free to use it but also give the credits for the same.
