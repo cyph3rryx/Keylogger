@@ -11,3 +11,7 @@ This version of the program includes the following additional features:
     4. It defines a save_record function that takes the elapsed time and key press count as arguments and writes them to the records.txt file along with the current date and time, username, and hostname.
     
     5. It catches both the KeyboardInterrupt and SystemExit exceptions, which allows the program to be interrupted using either CTRL+C or the exit command.
+    
+# Contribution
+
+You can contribute to this project by analyzing the code and mention the tweaks by creating pull request.
