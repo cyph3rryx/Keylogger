@@ -20,7 +20,22 @@ The script uses the keyboard module to listen for key presses and keeps track of
 
 When the user stops the recording session by pressing `Ctrl+C`, the script calculates the elapsed time and calls a `save_record` function to write the record to the `records.txt` file. The record contains the current time, the elapsed time, the number of key presses, the username of the user who ran the script, and the hostname of the computer the script is running on.
 
-Overall, the script can be used to track how many key presses a user makes during a certain period of time, which can be useful for research, productivity analysis, or any other purposes that require measuring keyboard usage.
+Overall, the script can be used to track how many key presses a user makes during a certain period of time, which can be useful for research, productivity analysis, or any other purposes that require measuring keyboard usage
+
+# File Format
+
+The records.txt file contains one record per line. Each record contains the following fields:
+
+    Current time
+    Elapsed time (in seconds)
+    Key press count
+    User
+    Host
+
+The fields are separated by commas. Here's an example record:
+``` java
+2023-04-09 10:15:23, Elapsed time = 37.52 seconds, Key press count = 122, User = john, Host = mycomputer
+```
     
 # Contribution
 
