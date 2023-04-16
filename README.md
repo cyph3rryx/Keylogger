@@ -26,11 +26,11 @@ This version of the program includes the following additional features:
 
 The records.txt file contains one record per line. Each record contains the following fields:
 
-    Current time
-    Elapsed time (in seconds)
-    Key press count
-    User
-    Host
+    => Current time
+    => Elapsed time (in seconds)
+    => Key press count
+    => User
+    => Host
 
 The fields are separated by commas. Here's an example record:
 ``` java
