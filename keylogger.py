@@ -11,6 +11,7 @@ def on_key_press(event):
   global key_press_count
   key_press_count += 1
 
+
 keyboard.on_press(on_key_press)
 
 def save_record(elapsed_time, key_press_count):
